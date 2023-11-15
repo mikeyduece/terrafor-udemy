@@ -12,7 +12,7 @@ resource "aws_ami" "example" {
 
 resource "aws_instance" "myec2" {
   ami = aws_ami.example.id
-  instance_type = var.instance_type
+  instance_type = var.types["us-west-1"]
 }
 
 resource "aws_eip" "lb" {
