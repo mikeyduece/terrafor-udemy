@@ -1,18 +1,7 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
-# Create an AMI that will start a machine whose root device is backed by
-# an EBS volume populated from a snapshot. We assume that such a snapshot
-# already exists with the id "snap-xxxxxxxx".
-resource "aws_ami" "example" {
-  name = "terraform-udemy-course"
-  architecture = var.architecture
-}
-
 resource "aws_instance" "myec2" {
-  ami = aws_ami.example.id
+  ami = data.aws_ami.app_ami.id
   instance_type = var.types["us-west-1"]
+  count = 3
 }
 
 resource "aws_eip" "lb" {
