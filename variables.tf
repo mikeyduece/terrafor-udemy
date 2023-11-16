@@ -1,15 +1,15 @@
 variable "vpn_ip" {
-  type = string
+  type    = string
   default = "116.50.30.20/32"
 }
 
 variable "instance_type" {
-  type = string
+  type    = string
   default = "t2.micro"
 }
 
 variable "architecture" {
-  type = string
+  type    = string
   default = "x86_64"
 }
 
@@ -26,10 +26,10 @@ variable "timeout" {
 }
 
 variable "types" {
-  type = map
+  type = map(any)
   default = {
-    us-east-1 = "t2.micro"
-    us-west-1 = "t3.micro"
+    us-east-1  = "t2.micro"
+    us-west-1  = "t3.micro"
     ap-south-1 = "t2.nano"
   }
 }
