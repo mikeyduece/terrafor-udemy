@@ -1,4 +1,7 @@
-# Create a new load balancer
+/*
+Provides an Elastic Load Balancer resource,
+also known as a "Classic Load Balancer" after the release of Application/Network Load Balancers.
+*/
 resource "aws_elb" "bar" {
   name               = var.elb_name
   availability_zones = var.elb_availability_zones

@@ -1,3 +1,4 @@
+# Provides a security group resource.
 resource "aws_security_group" "allow_tls" {
   name        = "allow_tls"
   description = "Allow TLS inbound traffic"
