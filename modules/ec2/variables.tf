@@ -6,3 +6,13 @@ variable "types" {
     ap-south-1 = "t2.nano"
   }
 }
+
+variable "instance_type" {
+  type    = string
+  default = "t2.micro"
+}
+
+variable "architecture" {
+  type    = string
+  default = "x86_64"
+}
