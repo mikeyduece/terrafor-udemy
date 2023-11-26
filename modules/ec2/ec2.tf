@@ -5,7 +5,7 @@ This allows instances to be created, updated, and deleted. Instances also suppor
 resource "aws_instance" "myec2" {
   # ami           = data.aws_ami.app_ami.id
   ami           = "ami-0230bd60aa48260c6"
-  instance_type = var.types[var.instance_type]
+  instance_type = var.types[var.region]
 
   # Establishes connection to be used by all
   # generic remote provisioners (i.e. file/remote-exec)
