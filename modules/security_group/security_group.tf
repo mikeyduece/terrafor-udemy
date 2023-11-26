@@ -1,3 +1,7 @@
+locals {
+  app_port = 8443
+}
+
 # Provides a security group resource.
 resource "aws_security_group" "allow_tls" {
   name        = "allow_tls"
@@ -5,8 +9,8 @@ resource "aws_security_group" "allow_tls" {
 
   ingress {
     description = "TLS from VPC"
-    from_port   = 443
-    to_port     = 443
+    from_port   = local.app_port
+    to_port     = local.app_port
     protocol    = "tcp"
     cidr_blocks = [var.vpn_ip]
   }
@@ -24,6 +28,6 @@ resource "aws_security_group" "allow_tls" {
   }
 }
 
-output "public_ip" {
-  value = aws_eip.lb.public_ip
+output "security_group_id" {
+  value = aws_security_group.allow_tls.id
 }
