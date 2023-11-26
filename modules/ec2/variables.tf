@@ -11,6 +11,15 @@ variable "types" {
   }
 }
 
+variable "instance_types" {
+  type = map(any)
+  default = {
+    default = "t2.nano"
+    dev     = "t2.micro"
+    prod    = "t2.micro"
+  }
+}
+
 variable "instance_type" {
   type    = string
   default = "t2.micro"

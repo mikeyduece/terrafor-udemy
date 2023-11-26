@@ -8,8 +8,9 @@ This allows instances to be created, updated, and deleted. Instances also suppor
 */
 resource "aws_instance" "myec2" {
   # ami           = data.aws_ami.app_ami.id
-  ami           = "ami-0230bd60aa48260c6"
-  instance_type = var.types[var.region]
+  ami                    = "ami-0230bd60aa48260c6"
+  instance_type          = lookup(var.instance_types,terraform.workspace)
+  # instance_type          = var.types[var.region]
   vpc_security_group_ids = [module.security_groups.security_group_id]
 
   # Establishes connection to be used by all
