@@ -1,3 +1,7 @@
+variable "region" {
+  type    = string
+  default = "us-west-1"
+}
 variable "types" {
   type = map(any)
   default = {
