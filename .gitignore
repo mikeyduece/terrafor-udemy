@@ -1,2 +1,3 @@
 .terraform/
 *.pem
+private_ips.txt
