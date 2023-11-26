@@ -12,7 +12,7 @@ resource "aws_security_group" "allow_tls" {
     from_port   = local.app_port
     to_port     = local.app_port
     protocol    = "tcp"
-    cidr_blocks = [var.vpn_ip]
+    cidr_blocks = ["${data.terraform_remote_state.eip.outputs.public_ip}/32"]
   }
 
   egress {
