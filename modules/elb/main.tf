@@ -5,12 +5,17 @@ also known as a "Classic Load Balancer" after the release of Application/Network
 resource "aws_elb" "bar" {
   name               = var.elb_name
   availability_zones = var.elb_availability_zones
+  access_logs {
+    bucket = "mikeheft-udemy-course"
+    enabled = true
+  }
 
   listener {
     instance_port     = 8000
-    instance_protocol = "http"
+    instance_protocol = "https"
     lb_port           = 80
-    lb_protocol       = "http"
+    lb_protocol       = "https"
+    ssl_certificate_id = ""
   }
 
   health_check {

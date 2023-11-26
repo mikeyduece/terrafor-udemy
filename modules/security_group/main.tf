@@ -16,6 +16,7 @@ resource "aws_security_group" "allow_tls" {
   }
 
   egress {
+    description = "TLS from VPC"
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
