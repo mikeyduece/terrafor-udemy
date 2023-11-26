@@ -1,3 +1,7 @@
 .terraform/
 *.pem
 private_ips.txt
+*.tfvars
+*.tfstate.*
+
+crash.log
