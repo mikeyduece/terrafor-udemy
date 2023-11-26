@@ -1,0 +1,13 @@
+repos:
+- repo: https://github.com/mikeyduece/terrafor-udemy
+  rev: v0.1
+  hooks:
+    - id: tflint
+      args:
+        - "--module"
+        - "--deep"
+        - "config=.tflint.hcl"
+    - id: terraform-validate
+    - id: terraform-fmt
+      args:
+        - "-recursive"
