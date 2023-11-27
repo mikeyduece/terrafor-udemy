@@ -2,38 +2,48 @@ digraph {
 	compound = "true"
 	newrank = "true"
 	subgraph "root" {
-		"[root] aws_eip.lb (expand)" [label = "aws_eip.lb", shape = "box"]
-		"[root] aws_elb.bar (expand)" [label = "aws_elb.bar", shape = "box"]
-		"[root] aws_instance.myec2 (expand)" [label = "aws_instance.myec2", shape = "box"]
-		"[root] aws_security_group.allow_tls (expand)" [label = "aws_security_group.allow_tls", shape = "box"]
-		"[root] data.aws_ami.app_ami (expand)" [label = "data.aws_ami.app_ami", shape = "box"]
+		"[root] module.ec2module.aws_instance.myec2 (expand)" [label = "module.ec2module.aws_instance.myec2", shape = "box"]
+		"[root] module.ec2module.module.security_groups.aws_security_group.allow_tls (expand)" [label = "module.ec2module.module.security_groups.aws_security_group.allow_tls", shape = "box"]
+		"[root] module.ec2module.module.security_groups.data.terraform_remote_state.eip (expand)" [label = "module.ec2module.module.security_groups.data.terraform_remote_state.eip", shape = "box"]
+		"[root] module.eip.aws_eip.lb (expand)" [label = "module.eip.aws_eip.lb", shape = "box"]
 		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
-		"[root] var.architecture" [label = "var.architecture", shape = "note"]
-		"[root] var.elb_availability_zones" [label = "var.elb_availability_zones", shape = "note"]
-		"[root] var.elb_name" [label = "var.elb_name", shape = "note"]
-		"[root] var.instance_type" [label = "var.instance_type", shape = "note"]
-		"[root] var.timeout" [label = "var.timeout", shape = "note"]
-		"[root] var.types" [label = "var.types", shape = "note"]
-		"[root] var.vpn_ip" [label = "var.vpn_ip", shape = "note"]
-		"[root] aws_eip.lb (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
-		"[root] aws_elb.bar (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
-		"[root] aws_elb.bar (expand)" -> "[root] var.elb_availability_zones"
-		"[root] aws_elb.bar (expand)" -> "[root] var.elb_name"
-		"[root] aws_elb.bar (expand)" -> "[root] var.timeout"
-		"[root] aws_instance.myec2 (expand)" -> "[root] data.aws_ami.app_ami (expand)"
-		"[root] aws_instance.myec2 (expand)" -> "[root] var.types"
-		"[root] aws_security_group.allow_tls (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
-		"[root] aws_security_group.allow_tls (expand)" -> "[root] var.vpn_ip"
-		"[root] data.aws_ami.app_ami (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
-		"[root] output.public_ip (expand)" -> "[root] aws_eip.lb (expand)"
-		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_eip.lb (expand)"
-		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_elb.bar (expand)"
-		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_instance.myec2 (expand)"
-		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_security_group.allow_tls (expand)"
+		"[root] provider[\"terraform.io/builtin/terraform\"]" [label = "provider[\"terraform.io/builtin/terraform\"]", shape = "diamond"]
+		"[root] module.ec2module (close)" -> "[root] module.ec2module.aws_instance.myec2 (expand)"
+		"[root] module.ec2module (close)" -> "[root] module.ec2module.module.security_groups (close)"
+		"[root] module.ec2module (close)" -> "[root] module.ec2module.output.region (expand)"
+		"[root] module.ec2module (close)" -> "[root] module.ec2module.var.architecture (expand)"
+		"[root] module.ec2module (close)" -> "[root] module.ec2module.var.instance_type (expand)"
+		"[root] module.ec2module (close)" -> "[root] module.ec2module.var.types (expand)"
+		"[root] module.ec2module.aws_instance.myec2 (expand)" -> "[root] module.ec2module.module.security_groups.output.security_group_id (expand)"
+		"[root] module.ec2module.aws_instance.myec2 (expand)" -> "[root] module.ec2module.var.instance_types (expand)"
+		"[root] module.ec2module.module.security_groups (close)" -> "[root] module.ec2module.module.security_groups.output.security_group_id (expand)"
+		"[root] module.ec2module.module.security_groups (expand)" -> "[root] module.ec2module (expand)"
+		"[root] module.ec2module.module.security_groups.aws_security_group.allow_tls (expand)" -> "[root] module.ec2module.module.security_groups.data.terraform_remote_state.eip (expand)"
+		"[root] module.ec2module.module.security_groups.aws_security_group.allow_tls (expand)" -> "[root] module.ec2module.module.security_groups.local.app_port (expand)"
+		"[root] module.ec2module.module.security_groups.aws_security_group.allow_tls (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] module.ec2module.module.security_groups.data.terraform_remote_state.eip (expand)" -> "[root] module.ec2module.module.security_groups (expand)"
+		"[root] module.ec2module.module.security_groups.data.terraform_remote_state.eip (expand)" -> "[root] provider[\"terraform.io/builtin/terraform\"]"
+		"[root] module.ec2module.module.security_groups.local.app_port (expand)" -> "[root] module.ec2module.module.security_groups (expand)"
+		"[root] module.ec2module.module.security_groups.output.security_group_id (expand)" -> "[root] module.ec2module.module.security_groups.aws_security_group.allow_tls (expand)"
+		"[root] module.ec2module.output.region (expand)" -> "[root] module.ec2module.var.region (expand)"
+		"[root] module.ec2module.var.architecture (expand)" -> "[root] module.ec2module (expand)"
+		"[root] module.ec2module.var.instance_type (expand)" -> "[root] module.ec2module (expand)"
+		"[root] module.ec2module.var.instance_types (expand)" -> "[root] module.ec2module (expand)"
+		"[root] module.ec2module.var.region (expand)" -> "[root] module.ec2module (expand)"
+		"[root] module.ec2module.var.types (expand)" -> "[root] module.ec2module (expand)"
+		"[root] module.eip (close)" -> "[root] module.eip.output.public_ip (expand)"
+		"[root] module.eip.aws_eip.lb (expand)" -> "[root] module.eip (expand)"
+		"[root] module.eip.aws_eip.lb (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] module.eip.output.public_ip (expand)" -> "[root] module.eip.aws_eip.lb (expand)"
+		"[root] output.public_ip (expand)" -> "[root] module.eip.output.public_ip (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.ec2module.aws_instance.myec2 (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.eip.aws_eip.lb (expand)"
+		"[root] provider[\"terraform.io/builtin/terraform\"] (close)" -> "[root] module.ec2module.module.security_groups.data.terraform_remote_state.eip (expand)"
+		"[root] root" -> "[root] module.ec2module (close)"
+		"[root] root" -> "[root] module.eip (close)"
 		"[root] root" -> "[root] output.public_ip (expand)"
 		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
-		"[root] root" -> "[root] var.architecture"
-		"[root] root" -> "[root] var.instance_type"
+		"[root] root" -> "[root] provider[\"terraform.io/builtin/terraform\"] (close)"
 	}
 }
 
