@@ -15,7 +15,6 @@ resource "aws_elb" "bar" {
     instance_protocol = "https"
     lb_port           = 80
     lb_protocol       = "https"
-    ssl_certificate_id = ""
   }
 
   health_check {

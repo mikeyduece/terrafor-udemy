@@ -6,7 +6,3 @@ module "ec2module" {
 module "eip" {
   source = "./modules/eip"
 }
-
-module "elb" {
-  source = "./modules/elb"
-}
