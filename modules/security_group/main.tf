@@ -1,5 +1,7 @@
 locals {
   app_port = 8443
+  remote_state_outputs = data.terraform_remote_state.eip.outputs
+  public_ip = lookup(local.remote_state_outputs, "public_ip", "0.0.0.0")
 }
 
 # Provides a security group resource.
@@ -12,7 +14,7 @@ resource "aws_security_group" "allow_tls" {
     from_port   = local.app_port
     to_port     = local.app_port
     protocol    = "tcp"
-    cidr_blocks = ["${data.terraform_remote_state.eip.outputs.public_ip}/32"]
+    cidr_blocks = ["${local.public_ip}/32"]
   }
 
   egress {
